@@ -12,6 +12,7 @@ const config = {
     'card': ['card.css'],
     'hero': ['hero.css'],
     'testimonial': ['testimonial.css'],
+    'form': ['form.css'],
     'glassmorphic': ['glassmorphic.css']
   },
   // Order of CSS imports (lower numbers are imported first)
@@ -20,7 +21,8 @@ const config = {
     'button.css': 2,
     'card.css': 3,
     'testimonial.css': 4,
-    'hero.css': 5
+    'form.css': 5,
+    'hero.css': 6
   }
 };
 
@@ -94,6 +96,9 @@ async function build() {
     
     await fs.writeFile(indexPath, `// ${component} component\n${importStatements}\n`);
   }
+  
+  // Update HTML to reference files in dist/styles instead of src/components
+  html = html.replace(/href=["']src\/components\/([^"']+)["']/g, 'href="styles/$1"');
   
   // Write combined CSS file
   const combinedCssPath = path.join(stylesDir, 'all.css');

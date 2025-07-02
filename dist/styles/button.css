@@ -1,3 +1,30 @@
+/* Buttons Section */
+#buttons {
+  position: relative;
+  padding: 4rem 0;
+  margin: 4rem -2rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(14, 165, 233, 0.9) 100%), 
+              url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  color: white;
+}
+
+#buttons .container {
+  position: relative;
+  z-index: 1;
+}
+
+#buttons h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
 /* Button Styles */
 .glass-button {
   background: rgba(255, 255, 255, 0.1);
