@@ -1,72 +1,37 @@
 /* Buttons Section */
 #buttons {
   position: relative;
-  padding: 4rem 0;
-  margin: 4rem -2rem;
+  padding: 4rem 2rem;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(14, 165, 233, 0.9) 100%), 
-              url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: overlay;
+  background: linear-gradient(135deg, #3B82F6 0%, #0EA5E9 100%);
   color: white;
 }
 
 #buttons .container {
   position: relative;
   z-index: 1;
+  text-align: center;
 }
 
 #buttons h2 {
-  color: white;
-  text-align: center;
-  margin-bottom: 3rem;
-  font-size: 2.5rem;
-  font-weight: 600;
+    color: white;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    font-weight: 600;
 }
 
-/* Button Styles */
-.glass-button {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  margin: 0.5rem;
-  font-family: 'Poppins', sans-serif;
-}
+/* Button Component Styles */
+/* Base styles are in glass.css -> .glass-button */
 
-.glass-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.glass-button.primary {
-  background: rgba(255, 255, 255, 0.2);
-  font-weight: 600;
-}
-
-.glass-button.secondary {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-/* Button Sizes */
-.glass-button.small {
+/* Button Size Variations */
+.button-sm {
+  /* Overrides default padding from .glass-button */
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
 }
 
-.glass-button.large {
+.button-lg {
+  /* Overrides default padding from .glass-button */
   padding: 1rem 2rem;
-  font-size: 1.1rem;
+  font-size: 1.125rem;
 }

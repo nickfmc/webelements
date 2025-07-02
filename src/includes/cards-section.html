@@ -2,29 +2,66 @@
     <div class="container">
         <h2>Glass Cards</h2>
         <div class="component-preview">
-            <div class="component-grid">
-                <div class="glass-card">
-                    <h3>Basic Card</h3>
-                    <p>This is a basic glass card with some sample content. The glass effect is created using backdrop-filter.</p>
+            <div class="component-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+                <!-- Standard Dark Card -->
+                <div class="card glass glass-dark glass-interactive glass-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Standard Card</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>A standard card using <code>.glass</code>, <code>.glass-dark</code>, and <code>.glass-interactive</code>. The internal structure is handled by <code>.card-*</code> classes.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span>Footer content</span>
+                        <a href="#" class="glass glass-button glass-dark glass-interactive glass-rounded-sm">Details</a>
+                    </div>
                 </div>
-                <div class="glass-card">
-                    <h3>Card with Image</h3>
-                    <div class="card-image" style="height: 150px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; margin-bottom: 1rem;"></div>
-                    <p>Cards can contain any content including images, forms, or other components.</p>
+
+                <!-- Light Card on Dark Background -->
+                <div class="card glass glass-light glass-interactive glass-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Light Card</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>This card uses <code>.glass-light</code> to stand out on dark backgrounds. Note how the text color is automatically handled.</p>
+                    </div>
+                     <div class="card-footer">
+                        <span>Footer content</span>
+                        <a href="#" class="glass glass-button glass-light glass-interactive glass-rounded-sm">Details</a>
+                    </div>
                 </div>
-                <div class="glass-card featured">
-                    <div class="featured-badge">Featured</div>
-                    <h3>Featured Card</h3>
-                    <p>This card has a special featured style to highlight important content.</p>
+
+                <!-- Horizontal Card -->
+                <div class="card glass glass-dark glass-interactive glass-card card-horizontal">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Mountain Landscape" style="width: 100%; height: auto; border-radius: 12px;">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">Horizontal Card</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Using <code>.card-horizontal</code> changes the layout. The glass effect remains consistent.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="mt-4" style="background: rgba(0, 0, 0, 0.2); padding: 1.5rem; border-radius: 12px; margin-top: 3rem;">
                 <h3 class="text-center" style="margin-bottom: 1.5rem;">Implementation Example</h3>
-                <pre><code class="language-html">&lt;div class="glass-card"&gt;
-  &lt;h3&gt;Card Title&lt;/h3&gt;
-  &lt;p&gt;Card content goes here. The glass effect is automatically applied.&lt;/p&gt;
-  &lt;button class="glass-button"&gt;Learn More&lt;/button&gt;
+                <pre><code class="language-html">&lt;!-- For a standard dark card --&gt;
+&lt;div class="card glass glass-dark glass-interactive glass-card"&gt;
+  &lt;div class="card-header"&gt;
+    &lt;h3 class="card-title"&gt;Card Title&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="card-body"&gt;
+    &lt;p&gt;Card content goes here.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- For a light card --&gt;
+&lt;div class="card glass glass-light glass-interactive glass-card"&gt;
+  ...
 &lt;/div&gt;</code></pre>
             </div>
         </div>

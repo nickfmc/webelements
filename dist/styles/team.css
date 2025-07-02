@@ -1,0 +1,130 @@
+/* Team Component Styles */
+.team-section {
+  padding: 6rem 2rem;
+  background: #f4f7fc;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-section .section-title h2 {
+  color: #1e293b;
+}
+
+.team-section .section-title p {
+  color: #64748b;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.team-member {
+  /* Glass styles are now handled by global classes */
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.team-member:hover {
+  transform: translateY(-10px);
+  /* Box-shadow is now handled by .glass-interactive */
+}
+
+.member-image {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.team-member:hover .member-image img {
+  transform: scale(1.05);
+}
+
+.member-social {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  transition: bottom 0.3s ease;
+}
+
+.team-member:hover .member-social {
+  bottom: 0;
+}
+
+.social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-link:hover {
+  background: #4f46e5;
+  color: white;
+  transform: translateY(-3px);
+}
+
+.member-info {
+  padding: 1.5rem;
+  /* The background is now handled by the .glass-light class */
+}
+
+.member-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.member-role {
+  font-size: 0.9375rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .team-section {
+    padding: 4rem 1rem;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .member-image {
+    height: 350px;
+  }
+}

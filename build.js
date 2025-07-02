@@ -17,23 +17,31 @@ const config = {
   dist: 'dist',
   includes: 'src/includes',
   components: {
-    'glass': ['glass-base.css'],  // Base glass styles first
+    'glass': ['glass.css'],       // Core glassmorphic system
     'header': ['header.css'],     // Header styles
     'button': ['button.css'],
     'card': ['card.css'],
-    'hero': ['hero.css', 'hero-styles.css'],
     'testimonial': ['testimonial.css'],
-    'form': ['form.css']
+    'form': ['form.css'],
+    'hero': ['hero.css', 'hero-styles.css'],
+    'pricing': ['pricing.css'],
+    'features': ['features.css'],
+    'team': ['team.css'],
+    'cta': ['cta.css']
   },
   // Order of CSS imports (lower numbers are imported first)
   cssOrder: {
-    'glass-base.css': 1,  // Base glass styles first
+    'glass.css': 1,         // Core glassmorphic system must be first
     'header.css': 2,      // Header styles early for proper layering
     'button.css': 3,
     'card.css': 4,
     'testimonial.css': 5,
     'form.css': 6,
-    'hero.css': 7
+    'pricing.css': 7,
+    'features.css': 8,
+    'team.css': 9,
+    'cta.css': 10,
+    'hero.css': 11
   }
 };
 

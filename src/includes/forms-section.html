@@ -1,53 +1,48 @@
 <section id="forms" class="component-section">
     <div class="container">
         <h2>Contact Us</h2>
-        <div class="glass-form-container">
-            <form class="glass-form">
+        <div class="form-container">
+            <form class="glass glass-dark glass-card glass-interactive">
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                    <input type="text" id="name" class="glass-input" placeholder="Enter your name" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    <input type="email" id="email" class="glass-input" placeholder="Enter your email" required>
                 </div>
                 <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" id="subject" class="form-control" placeholder="What's this about?">
+                    <input type="text" id="subject" class="glass-input" placeholder="What's this about?">
                 </div>
                 <div class="form-group">
                     <label for="message">Your Message</label>
-                    <textarea id="message" class="form-control" placeholder="How can we help you?" required></textarea>
+                    <textarea id="message" class="glass-input" placeholder="How can we help you?" required></textarea>
                 </div>
-                <button type="submit" class="btn-submit">Send Message</button>
+                <button type="submit" class="btn-submit glass glass-button glass-dark glass-interactive glass-rounded-sm">Send Message</button>
             </form>
-            
-            <div class="form-example">
-                <h3>Implementation Example</h3>
-                <pre><code class="language-html">&lt;form class="glass-form"&gt;
+        </div>
+
+        <div class="mt-4" style="background: rgba(0, 0, 0, 0.2); padding: 1.5rem; border-radius: 12px; margin-top: 3rem;">
+            <h3 class="text-center" style="margin-bottom: 1.5rem;">Implementation Example</h3>
+            <pre><code class="language-html">&lt;!-- Form container with glass card effect --&gt;
+&lt;form class="form-container glass glass-dark glass-card glass-interactive"&gt;
   &lt;div class="form-group"&gt;
     &lt;label for="name"&gt;Full Name&lt;/label&gt;
-    &lt;input type="text" id="name" class="form-control" placeholder="Enter your name" required&gt;
+    &lt;input type="text" id="name" class="glass-input" required&gt;
   &lt;/div&gt;
-  
-  &lt;div class="form-group"&gt;
-    &lt;label for="email"&gt;Email Address&lt;/label&gt;
-    &lt;input type="email" id="email" class="form-control" placeholder="Enter your email" required&gt;
-  &lt;/div&gt;
-  
-  &lt;div class="form-group"&gt;
-    &lt;label for="subject"&gt;Subject&lt;/label&gt;
-    &lt;input type="text" id="subject" class="form-control" placeholder="What's this about?"&gt;
-  &lt;/div&gt;
-  
+
+  &lt;!-- Textarea uses the same class --&gt;
   &lt;div class="form-group"&gt;
     &lt;label for="message"&gt;Your Message&lt;/label&gt;
-    &lt;textarea id="message" class="form-control" required&gt;&lt;/textarea&gt;
+    &lt;textarea id="message" class="glass-input" required&gt;&lt;/textarea&gt;
   &lt;/div&gt;
-  
-  &lt;button type="submit" class="btn-submit"&gt;Send Message&lt;/button&gt;
+
+  &lt;!-- Submit button uses glass button classes --&gt;
+  &lt;button type="submit" class="btn-submit glass glass-button glass-dark glass-interactive"&gt;
+    Send Message
+  &lt;/button&gt;
 &lt;/form&gt;</code></pre>
-            </div>
         </div>
     </div>
 </section>

@@ -1,15 +1,10 @@
-/* Testimonial Styles */
+/* Testimonial Section Styles */
 .testimonial-section {
   position: relative;
-  padding: 6rem 0;
+  padding: 6rem 2rem;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(106, 17, 203, 0.9) 0%, rgba(37, 117, 252, 0.9) 100%), 
-              url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: overlay;
+  background: linear-gradient(135deg, #6A11CB 0%, #2575FC 100%);
   color: white;
-  margin: 4rem 0;
 }
 
 .testimonial-section .container {
@@ -20,71 +15,24 @@
 .testimonial-section h2 {
   text-align: center;
   margin-bottom: 3rem;
-  color: white;
   font-size: 2.5rem;
   font-weight: 600;
-  position: relative;
-  z-index: 2;
 }
 
 .testimonial-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
-  position: relative;
-  z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
 }
 
-/* Glass overlay effect for the entire section */
-.testimonial-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 1;
-}
-
+/* Testimonial Card Layout */
 .testimonial-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  padding: 2rem;
-  transition: all 0.3s ease;
-  color: white;
+  /* The glass effect is now handled by .glass, .glass-dark, etc. */
   display: flex;
   flex-direction: column;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-}
-
-.testimonial-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-  z-index: -1;
-  border-radius: 16px;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
-  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .testimonial-avatar {
@@ -106,11 +54,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.testimonial-card:hover .testimonial-avatar img {
-  transform: scale(1.1);
 }
 
 .testimonial-quote {
@@ -120,77 +63,12 @@
   flex-grow: 1;
   position: relative;
   padding: 0 1rem;
-  position: relative;
-  padding: 0 1rem;
   font-size: 1.05rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .testimonial-grid {
-    max-width: 900px;
-  }
-}
-
-@media (max-width: 992px) {
-  .testimonial-grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 800px;
-  }
-}
-
-@media (max-width: 768px) {
-  .testimonial-section {
-    padding: 4rem 0;
-    margin: 2rem 0;
-  }
-  
-  .testimonial-section h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-  
-  .testimonial-grid {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    padding: 0 1.5rem;
-  }
-  
-  .testimonial-card {
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .testimonial-section {
-    padding: 3rem 0;
-  }
-  
-  .testimonial-section h2 {
-    font-size: 1.75rem;
-  }
-  
-  .testimonial-grid {
-    padding: 0 1rem;
-  }
-  
-  .testimonial-card {
-    padding: 1.25rem;
-  }
-  
-  .testimonial-avatar {
-    width: 70px;
-    height: 70px;
-  }
-  
-  .testimonial-quote {
-    font-size: 1rem;
-  }
 }
 
 .testimonial-quote::before,
 .testimonial-quote::after {
-  content: '\201C';
+  content: '"';
   font-family: Georgia, serif;
   font-size: 3rem;
   color: rgba(255, 255, 255, 0.3);
@@ -204,15 +82,14 @@
 }
 
 .testimonial-quote::after {
-  content: '\201D';
   bottom: -1.5rem;
   right: 0;
 }
 
 .testimonial-author {
   font-weight: 600;
-  margin-top: 2rem;
-  color: white;
+  margin-top: auto; /* Pushes author to the bottom */
+  padding-top: 1.5rem;
   font-size: 1.1rem;
 }
 
@@ -220,13 +97,6 @@
   font-size: 0.9rem;
   opacity: 0.8;
   margin-top: 0.25rem;
-  font-style: italic;
-}
-
-.testimonial-rating {
-  color: #ffd700;
-  margin: 0.5rem 0 0;
-  font-size: 0.9rem;
 }
 
 /* Responsive adjustments */
@@ -237,15 +107,5 @@
   
   .testimonial-grid {
     grid-template-columns: 1fr;
-    max-width: 500px;
-  }
-  
-  .testimonial-card {
-    padding: 1.5rem;
-  }
-  
-  .testimonial-avatar {
-    width: 70px;
-    height: 70px;
   }
 }

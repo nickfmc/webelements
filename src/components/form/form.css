@@ -1,14 +1,9 @@
 /* Forms Section */
 #forms {
   position: relative;
-  padding: 6rem 0;
-  margin: 4rem -2rem;
+  padding: 4rem 2rem;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(220, 38, 38, 0.9) 0%, rgba(249, 115, 22, 0.9) 100%), 
-              url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: overlay;
+  background: linear-gradient(135deg, #D946EF 0%, #F97316 100%);
   color: white;
 }
 
@@ -25,18 +20,15 @@
   font-weight: 600;
 }
 
-/* Form Styles */
-/* Form styles that extend the base glass class */
-.glass-form {
+/* Form Layout Styles */
+.form-container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 2rem;
   width: 100%;
 }
 
 .form-group {
   margin-bottom: 1.5rem;
-  width: 100%;
 }
 
 .form-group label {
@@ -45,47 +37,14 @@
   font-weight: 500;
 }
 
-.form-control {
+/* The submit button will use .glass-button classes */
+.btn-submit {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-family: 'Poppins', sans-serif;
-  transition: var(--glass-transition, all 0.3s ease);
-  display: block;
-  font-size: 1rem;
-  line-height: 1.5;
 }
 
-.form-control:focus {
-  outline: none;
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-}
-
-textarea.form-control {
+textarea.glass-input {
   min-height: 120px;
   resize: vertical;
-}
-
-.btn-submit {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 8px;
-  padding: 0.75rem 2rem;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  font-size: 1rem;
-}
-
-.btn-submit:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
 }
 
 /* Responsive Adjustments */
@@ -94,7 +53,8 @@ textarea.form-control {
     padding: 4rem 1rem;
   }
   
-  .glass-form {
+  .form-container {
+    /* .glass-card adds 2rem padding, so we can reduce it on mobile */
     padding: 1.5rem;
   }
 }

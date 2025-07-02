@@ -1,0 +1,180 @@
+/* Pricing Component Styles */
+.pricing-section {
+  padding: 6rem 0;
+  background: #f4f7fc;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-section .section-title h2 {
+  color: #1e293b;
+}
+
+.pricing-section .section-title p {
+  color: #64748b;
+}
+
+.pricing-section .section-title {
+  margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.pricing-card {
+  /* Glass styles are now handled by global classes */
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  /* The border is now handled by the .glass class */
+}
+
+.pricing-card:hover {
+  /* The transform and box-shadow are now handled by .glass-interactive */
+  transform: translateY(-5px);
+}
+
+.pricing-card.popular {
+  /* The popular card gets a unique border color and a more pronounced lift */
+  border: 2px solid #4f46e5;
+  transform: translateY(-10px);
+}
+
+.pricing-card.popular::after {
+  content: 'Most Popular';
+  position: absolute;
+  top: 20px;
+  right: -40px;
+  background: #4f46e5;
+  color: white;
+  padding: 0.25rem 2.5rem;
+  transform: rotate(45deg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+
+
+.pricing-header {
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.pricing-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #4f46e5, #a855f7);
+  border-radius: 3px;
+}
+
+.pricing-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-price {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #4f46e5;
+  margin: 1rem 0;
+  line-height: 1;
+}
+
+.pricing-duration {
+  font-size: 1rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.pricing-features li {
+  padding: 0.5rem 0;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pricing-features li::before {
+  content: '✓';
+  color: #10b981;
+  font-weight: bold;
+}
+
+.pricing-button {
+  display: inline-block;
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid #4f46e5;
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.pricing-button:hover {
+  background: #4338ca;
+  border-color: #4338ca;
+  transform: translateY(-2px);
+}
+
+.pricing-card.popular .pricing-button {
+  background: #4f46e5;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .pricing-card.popular {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .pricing-section {
+    padding: 4rem 0;
+  }
+}

@@ -1,0 +1,149 @@
+/* ==========================================================================
+   Glassmorphic UI - Core Stylesheet
+   ========================================================================== */
+
+/*
+ * 1. Core Variables
+ * 2. Base Glass Class
+ * 3. Appearance Modifiers (Light/Dark)
+ * 4. Shape Modifiers
+ * 5. Interactivity
+ * 6. Component Base Classes (Card, Button, etc.)
+ */
+
+/* 1. Core Variables
+   ========================================================================== */
+:root {
+  /* Base Properties */
+  --glass-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --glass-border-radius-base: 16px;
+  --glass-border-radius-sm: 8px;
+  --glass-border-radius-lg: 24px;
+  --glass-blur-base: 10px;
+
+  /* Light Theme */
+  --glass-light-bg: rgba(255, 255, 255, 0.2);
+  --glass-light-border-color: rgba(255, 255, 255, 0.3);
+  --glass-light-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  --glass-light-color: #1f2937; /* Dark text for light surfaces */
+
+  /* Dark Theme */
+  --glass-dark-bg: rgba(20, 20, 30, 0.4);
+  --glass-dark-border-color: rgba(255, 255, 255, 0.1);
+  --glass-dark-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-dark-color: #f9fafb; /* Light text for dark surfaces */
+}
+
+/* 2. Base Glass Class
+   ========================================================================== */
+.glass {
+  /* The core of the effect */
+  -webkit-backdrop-filter: blur(var(--glass-blur-base));
+  backdrop-filter: blur(var(--glass-blur-base));
+  transition: var(--glass-transition);
+  border-radius: var(--glass-border-radius-base);
+  position: relative;
+  z-index: 1;
+  overflow: hidden; /* Ensures content respects border-radius */
+}
+
+/* 3. Appearance Modifiers
+   ========================================================================== */
+.glass-light {
+  background: var(--glass-light-bg);
+  border: 1px solid var(--glass-light-border-color);
+  box-shadow: var(--glass-light-shadow);
+  color: var(--glass-light-color);
+}
+
+.glass-dark {
+  background: var(--glass-dark-bg);
+  border: 1px solid var(--glass-dark-border-color);
+  box-shadow: var(--glass-dark-shadow);
+  color: var(--glass-dark-color);
+}
+
+/* 4. Shape Modifiers
+   ========================================================================== */
+.glass-rounded-sm {
+  border-radius: var(--glass-border-radius-sm);
+}
+.glass-rounded-lg {
+  border-radius: var(--glass-border-radius-lg);
+}
+
+/* 5. Interactivity
+   ========================================================================== */
+.glass-interactive:hover {
+  transform: translateY(-4px);
+  --glass-light-bg: rgba(255, 255, 255, 0.3);
+  --glass-dark-bg: rgba(20, 20, 30, 0.6);
+  --glass-light-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
+  --glass-dark-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* 6. Component Base Classes
+   ========================================================================== */
+
+/* Base class for any card-like element */
+.glass-card {
+  padding: 2rem;
+}
+
+/* Base class for any button-like element */
+.glass-button {
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none; /* The border is handled by the glass modifiers */
+}
+
+/* Base for form inputs */
+.glass-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: var(--glass-border-radius-sm); /* Use the smaller radius for inputs */
+  transition: var(--glass-transition);
+  border: 1px solid; /* Border color will be set by light/dark modifiers */
+  background-color: transparent; /* Background color will be set by light/dark modifiers */
+  color: inherit; /* Inherit text color from parent */
+}
+
+.glass-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+.glass-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px; /* Shadow color will be set by light/dark modifiers */
+}
+
+/* Input styles within a .glass-dark container */
+.glass-dark .glass-input {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--glass-dark-border-color);
+}
+
+.glass-dark .glass-input:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+/* Input styles within a .glass-light container */
+.glass-light .glass-input {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: var(--glass-light-border-color);
+}
+
+.glass-light .glass-input:focus {
+  border-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}

@@ -1,113 +1,154 @@
 /* Combined CSS for all components */
 
-/* glass/glass-base.css */
-/* Base Glass Effect */
+/* glass/glass.css */
+/* ==========================================================================
+   Glassmorphic UI - Core Stylesheet
+   ========================================================================== */
+
+/*
+ * 1. Core Variables
+ * 2. Base Glass Class
+ * 3. Appearance Modifiers (Light/Dark)
+ * 4. Shape Modifiers
+ * 5. Interactivity
+ * 6. Component Base Classes (Card, Button, etc.)
+ */
+
+/* 1. Core Variables
+   ========================================================================== */
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  --glass-blur: blur(12px);
-  --glass-border-radius: 16px;
-  --glass-transition: all 0.3s ease;
+  /* Base Properties */
+  --glass-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --glass-border-radius-base: 16px;
+  --glass-border-radius-sm: 8px;
+  --glass-border-radius-lg: 24px;
+  --glass-blur-base: 10px;
+
+  /* Light Theme */
+  --glass-light-bg: rgba(255, 255, 255, 0.2);
+  --glass-light-border-color: rgba(255, 255, 255, 0.3);
+  --glass-light-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  --glass-light-color: #1f2937; /* Dark text for light surfaces */
+
+  /* Dark Theme */
+  --glass-dark-bg: rgba(20, 20, 30, 0.4);
+  --glass-dark-border-color: rgba(255, 255, 255, 0.1);
+  --glass-dark-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-dark-color: #f9fafb; /* Light text for dark surfaces */
 }
 
-/* Base Glass Class */
+/* 2. Base Glass Class
+   ========================================================================== */
 .glass {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
-  border-radius: var(--glass-border-radius);
-  box-shadow: var(--glass-shadow);
+  /* The core of the effect */
+  -webkit-backdrop-filter: blur(var(--glass-blur-base));
+  backdrop-filter: blur(var(--glass-blur-base));
   transition: var(--glass-transition);
-  box-sizing: border-box;
-}
-
-/* Glass Hover Effect */
-.glass:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Glass Card - Extends base glass styles */
-.glass-card {
-  /* Base glass styles */
-  background: var(--glass-bg, rgba(255, 255, 255, 0.1));
-  backdrop-filter: var(--glass-blur, blur(12px));
-  -webkit-backdrop-filter: var(--glass-blur, blur(12px));
-  border: var(--glass-border, 1px solid rgba(255, 255, 255, 0.2));
-  border-radius: var(--glass-border-radius, 16px);
-  box-shadow: var(--glass-shadow, 0 8px 32px 0 rgba(31, 38, 135, 0.37));
-  transition: var(--glass-transition, all 0.3s ease);
-  /* Card specific styles */
-  padding: 1.5rem;
+  border-radius: var(--glass-border-radius-base);
   position: relative;
-  overflow: hidden;
+  z-index: 1;
+  overflow: hidden; /* Ensures content respects border-radius */
 }
 
-/* Glass Form - Extends base glass styles */
-.glass-form {
-  /* Base glass styles */
-  background: var(--glass-bg, rgba(255, 255, 255, 0.1));
-  backdrop-filter: var(--glass-blur, blur(12px));
-  -webkit-backdrop-filter: var(--glass-blur, blur(12px));
-  border: var(--glass-border, 1px solid rgba(255, 255, 255, 0.2));
-  border-radius: var(--glass-border-radius, 16px);
-  box-shadow: var(--glass-shadow, 0 8px 32px 0 rgba(31, 38, 135, 0.37));
-  transition: var(--glass-transition, all 0.3s ease);
-  /* Form specific styles */
-  max-width: 600px;
-  margin: 0 auto;
+/* 3. Appearance Modifiers
+   ========================================================================== */
+.glass-light {
+  background: var(--glass-light-bg);
+  border: 1px solid var(--glass-light-border-color);
+  box-shadow: var(--glass-light-shadow);
+  color: var(--glass-light-color);
+}
+
+.glass-dark {
+  background: var(--glass-dark-bg);
+  border: 1px solid var(--glass-dark-border-color);
+  box-shadow: var(--glass-dark-shadow);
+  color: var(--glass-dark-color);
+}
+
+/* 4. Shape Modifiers
+   ========================================================================== */
+.glass-rounded-sm {
+  border-radius: var(--glass-border-radius-sm);
+}
+.glass-rounded-lg {
+  border-radius: var(--glass-border-radius-lg);
+}
+
+/* 5. Interactivity
+   ========================================================================== */
+.glass-interactive:hover {
+  transform: translateY(-4px);
+  --glass-light-bg: rgba(255, 255, 255, 0.3);
+  --glass-dark-bg: rgba(20, 20, 30, 0.6);
+  --glass-light-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
+  --glass-dark-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* 6. Component Base Classes
+   ========================================================================== */
+
+/* Base class for any card-like element */
+.glass-card {
   padding: 2rem;
-  width: 100%;
 }
 
-/* Glass Button - Extends base glass styles */
+/* Base class for any button-like element */
 .glass-button {
-  /* Base glass styles */
-  background: var(--glass-bg, rgba(255, 255, 255, 0.1));
-  backdrop-filter: var(--glass-blur, blur(12px));
-  -webkit-backdrop-filter: var(--glass-blur, blur(12px));
-  border: var(--glass-border, 1px solid rgba(255, 255, 255, 0.2));
-  border-radius: var(--glass-border-radius, 16px);
-  box-shadow: var(--glass-shadow, 0 8px 32px 0 rgba(31, 38, 135, 0.37));
-  transition: var(--glass-transition, all 0.3s ease);
-  /* Button specific styles */
-  border: none;
   padding: 0.75rem 1.5rem;
-  cursor: pointer;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  color: white;
+  font-weight: 600;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  border: none; /* The border is handled by the glass modifiers */
 }
 
-.glass-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+/* Base for form inputs */
+.glass-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: var(--glass-border-radius-sm); /* Use the smaller radius for inputs */
+  transition: var(--glass-transition);
+  border: 1px solid; /* Border color will be set by light/dark modifiers */
+  background-color: transparent; /* Background color will be set by light/dark modifiers */
+  color: inherit; /* Inherit text color from parent */
 }
 
-/* Glass Card Variations */
-.glass-card.featured {
-  --glass-bg: rgba(255, 255, 255, 0.15);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+.glass-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  :root {
-    --glass-border-radius: 12px;
-    --glass-blur: blur(8px);
-  }
-  
-  .glass-card,
-  .glass-form {
-    padding: 1.25rem;
-  }
+.glass-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px; /* Shadow color will be set by light/dark modifiers */
+}
+
+/* Input styles within a .glass-dark container */
+.glass-dark .glass-input {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--glass-dark-border-color);
+}
+
+.glass-dark .glass-input:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+/* Input styles within a .glass-light container */
+.glass-light .glass-input {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: var(--glass-light-border-color);
+}
+
+.glass-light .glass-input:focus {
+  border-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -309,74 +350,39 @@ glass-nav ul li a:not(.glass-button):hover::after {
 /* Buttons Section */
 #buttons {
   position: relative;
-  padding: 4rem 0;
-  margin: 4rem -2rem;
+  padding: 4rem 2rem;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(14, 165, 233, 0.9) 100%), 
-              url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: overlay;
+  background: linear-gradient(135deg, #3B82F6 0%, #0EA5E9 100%);
   color: white;
 }
 
 #buttons .container {
   position: relative;
   z-index: 1;
+  text-align: center;
 }
 
 #buttons h2 {
-  color: white;
-  text-align: center;
-  margin-bottom: 3rem;
-  font-size: 2.5rem;
-  font-weight: 600;
+    color: white;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    font-weight: 600;
 }
 
-/* Button Styles */
-.glass-button {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  margin: 0.5rem;
-  font-family: 'Poppins', sans-serif;
-}
+/* Button Component Styles */
+/* Base styles are in glass.css -> .glass-button */
 
-.glass-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.glass-button.primary {
-  background: rgba(255, 255, 255, 0.2);
-  font-weight: 600;
-}
-
-.glass-button.secondary {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-/* Button Sizes */
-.glass-button.small {
+/* Button Size Variations */
+.button-sm {
+  /* Overrides default padding from .glass-button */
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
 }
 
-.glass-button.large {
+.button-lg {
+  /* Overrides default padding from .glass-button */
   padding: 1rem 2rem;
-  font-size: 1.1rem;
+  font-size: 1.125rem;
 }
 
 
@@ -384,14 +390,9 @@ glass-nav ul li a:not(.glass-button):hover::after {
 /* Card Section Styles */
 #cards {
   position: relative;
-  padding: 4rem 0;
-  margin: 4rem -2rem;
+  padding: 4rem 2rem;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.9) 0%, rgba(236, 72, 153, 0.9) 100%), 
-              url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2129&q=80');
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: overlay;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
 }
 
@@ -400,31 +401,16 @@ glass-nav ul li a:not(.glass-button):hover::after {
   z-index: 1;
 }
 
-/* Card Styles - Extends base glass class */
-.glass-card {
-  padding: 1.5rem;
-  position: relative;
-  overflow: hidden;
-  color: white;
-  margin: 1rem 0;
-  transition: var(--glass-transition, all 0.3s ease);
-}
-
-.glass-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
-}
-
-/* Featured Card Variation */
-.glass-card.featured {
-  --glass-bg: rgba(255, 255, 255, 0.15);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+/* Card Component Styles */
+.card {
+  /* Spacing between cards */
+  margin-bottom: 2rem;
 }
 
 .card-header {
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--glass-dark-border-color, rgba(255, 255, 255, 0.1));
 }
 
 .card-title {
@@ -442,51 +428,56 @@ glass-nav ul li a:not(.glass-button):hover::after {
 .card-body {
   margin-bottom: 1.5rem;
   line-height: 1.6;
+  font-size: 1rem;
+  opacity: 0.9;
 }
 
 .card-footer {
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--glass-dark-border-color, rgba(255, 255, 255, 0.1));
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Card Variations */
-.card-featured {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
+/* Card Layout Variations */
 .card-horizontal {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
 }
 
 .card-horizontal .card-image {
-  width: 40%;
-  margin-right: 1.5rem;
+  width: 100%;
+  margin-right: 0;
+  margin-bottom: 1.5rem;
 }
 
 .card-horizontal .card-content {
   flex: 1;
 }
 
+@media (min-width: 768px) {
+  .card-horizontal {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .card-horizontal .card-image {
+    width: 40%;
+    margin-right: 2rem;
+    margin-bottom: 0;
+  }
+}
+
 
 /* testimonial/testimonial.css */
-/* Testimonial Styles */
+/* Testimonial Section Styles */
 .testimonial-section {
   position: relative;
-  padding: 6rem 0;
+  padding: 6rem 2rem;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(106, 17, 203, 0.9) 0%, rgba(37, 117, 252, 0.9) 100%), 
-              url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: overlay;
+  background: linear-gradient(135deg, #6A11CB 0%, #2575FC 100%);
   color: white;
-  margin: 4rem 0;
 }
 
 .testimonial-section .container {
@@ -497,71 +488,24 @@ glass-nav ul li a:not(.glass-button):hover::after {
 .testimonial-section h2 {
   text-align: center;
   margin-bottom: 3rem;
-  color: white;
   font-size: 2.5rem;
   font-weight: 600;
-  position: relative;
-  z-index: 2;
 }
 
 .testimonial-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
-  position: relative;
-  z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
 }
 
-/* Glass overlay effect for the entire section */
-.testimonial-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 1;
-}
-
+/* Testimonial Card Layout */
 .testimonial-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  padding: 2rem;
-  transition: all 0.3s ease;
-  color: white;
+  /* The glass effect is now handled by .glass, .glass-dark, etc. */
   display: flex;
   flex-direction: column;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-}
-
-.testimonial-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-  z-index: -1;
-  border-radius: 16px;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
-  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .testimonial-avatar {
@@ -583,11 +527,6 @@ glass-nav ul li a:not(.glass-button):hover::after {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.testimonial-card:hover .testimonial-avatar img {
-  transform: scale(1.1);
 }
 
 .testimonial-quote {
@@ -597,77 +536,12 @@ glass-nav ul li a:not(.glass-button):hover::after {
   flex-grow: 1;
   position: relative;
   padding: 0 1rem;
-  position: relative;
-  padding: 0 1rem;
   font-size: 1.05rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .testimonial-grid {
-    max-width: 900px;
-  }
-}
-
-@media (max-width: 992px) {
-  .testimonial-grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 800px;
-  }
-}
-
-@media (max-width: 768px) {
-  .testimonial-section {
-    padding: 4rem 0;
-    margin: 2rem 0;
-  }
-  
-  .testimonial-section h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-  
-  .testimonial-grid {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    padding: 0 1.5rem;
-  }
-  
-  .testimonial-card {
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .testimonial-section {
-    padding: 3rem 0;
-  }
-  
-  .testimonial-section h2 {
-    font-size: 1.75rem;
-  }
-  
-  .testimonial-grid {
-    padding: 0 1rem;
-  }
-  
-  .testimonial-card {
-    padding: 1.25rem;
-  }
-  
-  .testimonial-avatar {
-    width: 70px;
-    height: 70px;
-  }
-  
-  .testimonial-quote {
-    font-size: 1rem;
-  }
 }
 
 .testimonial-quote::before,
 .testimonial-quote::after {
-  content: '\201C';
+  content: '"';
   font-family: Georgia, serif;
   font-size: 3rem;
   color: rgba(255, 255, 255, 0.3);
@@ -681,15 +555,14 @@ glass-nav ul li a:not(.glass-button):hover::after {
 }
 
 .testimonial-quote::after {
-  content: '\201D';
   bottom: -1.5rem;
   right: 0;
 }
 
 .testimonial-author {
   font-weight: 600;
-  margin-top: 2rem;
-  color: white;
+  margin-top: auto; /* Pushes author to the bottom */
+  padding-top: 1.5rem;
   font-size: 1.1rem;
 }
 
@@ -697,13 +570,6 @@ glass-nav ul li a:not(.glass-button):hover::after {
   font-size: 0.9rem;
   opacity: 0.8;
   margin-top: 0.25rem;
-  font-style: italic;
-}
-
-.testimonial-rating {
-  color: #ffd700;
-  margin: 0.5rem 0 0;
-  font-size: 0.9rem;
 }
 
 /* Responsive adjustments */
@@ -714,16 +580,6 @@ glass-nav ul li a:not(.glass-button):hover::after {
   
   .testimonial-grid {
     grid-template-columns: 1fr;
-    max-width: 500px;
-  }
-  
-  .testimonial-card {
-    padding: 1.5rem;
-  }
-  
-  .testimonial-avatar {
-    width: 70px;
-    height: 70px;
   }
 }
 
@@ -732,14 +588,9 @@ glass-nav ul li a:not(.glass-button):hover::after {
 /* Forms Section */
 #forms {
   position: relative;
-  padding: 6rem 0;
-  margin: 4rem -2rem;
+  padding: 4rem 2rem;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(220, 38, 38, 0.9) 0%, rgba(249, 115, 22, 0.9) 100%), 
-              url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: overlay;
+  background: linear-gradient(135deg, #D946EF 0%, #F97316 100%);
   color: white;
 }
 
@@ -756,18 +607,15 @@ glass-nav ul li a:not(.glass-button):hover::after {
   font-weight: 600;
 }
 
-/* Form Styles */
-/* Form styles that extend the base glass class */
-.glass-form {
+/* Form Layout Styles */
+.form-container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 2rem;
   width: 100%;
 }
 
 .form-group {
   margin-bottom: 1.5rem;
-  width: 100%;
 }
 
 .form-group label {
@@ -776,47 +624,14 @@ glass-nav ul li a:not(.glass-button):hover::after {
   font-weight: 500;
 }
 
-.form-control {
+/* The submit button will use .glass-button classes */
+.btn-submit {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-family: 'Poppins', sans-serif;
-  transition: var(--glass-transition, all 0.3s ease);
-  display: block;
-  font-size: 1rem;
-  line-height: 1.5;
 }
 
-.form-control:focus {
-  outline: none;
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-}
-
-textarea.form-control {
+textarea.glass-input {
   min-height: 120px;
   resize: vertical;
-}
-
-.btn-submit {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 8px;
-  padding: 0.75rem 2rem;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  font-size: 1rem;
-}
-
-.btn-submit:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
 }
 
 /* Responsive Adjustments */
@@ -825,8 +640,635 @@ textarea.form-control {
     padding: 4rem 1rem;
   }
   
-  .glass-form {
+  .form-container {
+    /* .glass-card adds 2rem padding, so we can reduce it on mobile */
     padding: 1.5rem;
+  }
+}
+
+
+/* pricing/pricing.css */
+/* Pricing Component Styles */
+.pricing-section {
+  padding: 6rem 0;
+  background: #f4f7fc;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-section .section-title h2 {
+  color: #1e293b;
+}
+
+.pricing-section .section-title p {
+  color: #64748b;
+}
+
+.pricing-section .section-title {
+  margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.pricing-card {
+  /* Glass styles are now handled by global classes */
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  /* The border is now handled by the .glass class */
+}
+
+.pricing-card:hover {
+  /* The transform and box-shadow are now handled by .glass-interactive */
+  transform: translateY(-5px);
+}
+
+.pricing-card.popular {
+  /* The popular card gets a unique border color and a more pronounced lift */
+  border: 2px solid #4f46e5;
+  transform: translateY(-10px);
+}
+
+.pricing-card.popular::after {
+  content: 'Most Popular';
+  position: absolute;
+  top: 20px;
+  right: -40px;
+  background: #4f46e5;
+  color: white;
+  padding: 0.25rem 2.5rem;
+  transform: rotate(45deg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+
+
+.pricing-header {
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.pricing-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #4f46e5, #a855f7);
+  border-radius: 3px;
+}
+
+.pricing-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-price {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #4f46e5;
+  margin: 1rem 0;
+  line-height: 1;
+}
+
+.pricing-duration {
+  font-size: 1rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.pricing-features li {
+  padding: 0.5rem 0;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pricing-features li::before {
+  content: '✓';
+  color: #10b981;
+  font-weight: bold;
+}
+
+.pricing-button {
+  display: inline-block;
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid #4f46e5;
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.pricing-button:hover {
+  background: #4338ca;
+  border-color: #4338ca;
+  transform: translateY(-2px);
+}
+
+.pricing-card.popular .pricing-button {
+  background: #4f46e5;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .pricing-card.popular {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .pricing-section {
+    padding: 4rem 0;
+  }
+}
+
+
+/* features/features.css */
+/* Features Section Styles */
+.features-section {
+  padding: 6rem 2rem;
+  background: #f4f7fc;
+  position: relative;
+  overflow: hidden;
+}
+
+.features-section .section-title h2 {
+  color: #1e293b;
+}
+
+.features-section .section-title p {
+  color: #64748b;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Feature Card Layout */
+.feature-card {
+  /* Glass styles are now handled by global classes */
+  text-align: center;
+  position: relative;
+  /* The color property will be inherited from .glass-light */
+}
+
+/* Unique top border hover effect */
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: white;
+  font-size: 1.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
+}
+
+.feature-card:hover .feature-icon {
+  transform: rotateY(180deg);
+  box-shadow: 0 15px 30px rgba(79, 70, 229, 0.3);
+}
+
+.feature-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.feature-description {
+  line-height: 1.7;
+  margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .features-section {
+    padding: 4rem 1rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+
+/* team/team.css */
+/* Team Component Styles */
+.team-section {
+  padding: 6rem 2rem;
+  background: #f4f7fc;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-section .section-title h2 {
+  color: #1e293b;
+}
+
+.team-section .section-title p {
+  color: #64748b;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.team-member {
+  /* Glass styles are now handled by global classes */
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.team-member:hover {
+  transform: translateY(-10px);
+  /* Box-shadow is now handled by .glass-interactive */
+}
+
+.member-image {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.team-member:hover .member-image img {
+  transform: scale(1.05);
+}
+
+.member-social {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  transition: bottom 0.3s ease;
+}
+
+.team-member:hover .member-social {
+  bottom: 0;
+}
+
+.social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-link:hover {
+  background: #4f46e5;
+  color: white;
+  transform: translateY(-3px);
+}
+
+.member-info {
+  padding: 1.5rem;
+  /* The background is now handled by the .glass-light class */
+}
+
+.member-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.member-role {
+  font-size: 0.9375rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .team-section {
+    padding: 4rem 1rem;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .member-image {
+    height: 350px;
+  }
+}
+
+
+/* cta/cta.css */
+/* CTA Component Styles */
+.cta-section {
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==') center/cover no-repeat fixed;
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.cta-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 2;
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cta-description {
+  font-size: 1.25rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: none;
+  cursor: pointer;
+}
+
+.cta-button.primary {
+  background: rgba(255, 255, 255, 0.9);
+  color: #4f46e5;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cta-button.primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.9) 100%);
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.cta-button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button.primary:hover::before {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+}
+
+/* The .secondary button is now styled using the global glass classes */
+
+.cta-button i {
+  margin-right: 0.5rem;
+  font-size: 1.1em;
+}
+
+/* Decorative Elements */
+.cta-shape-1,
+.cta-shape-2,
+.cta-shape-3 {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+.cta-shape-1 {
+  width: 300px;
+  height: 300px;
+  top: -150px;
+  right: -100px;
+  animation: float 15s ease-in-out infinite;
+}
+
+.cta-shape-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -100px;
+  left: -50px;
+  animation: float 18s ease-in-out infinite reverse;
+  animation-delay: 1s;
+}
+
+.cta-shape-3 {
+  width: 150px;
+  height: 150px;
+  top: 50%;
+  right: 10%;
+  animation: float 12s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 5rem 0;
+  }
+  
+  .cta-title {
+    font-size: 2rem;
+  }
+  
+  .cta-description {
+    font-size: 1.1rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .cta-button {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .cta-shape-1,
+  .cta-shape-2,
+  .cta-shape-3 {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-section {
+    padding: 4rem 0;
+  }
+  
+  .cta-title {
+    font-size: 1.75rem;
+  }
+  
+  .cta-description {
+    font-size: 1rem;
   }
 }
 
