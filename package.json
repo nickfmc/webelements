@@ -1,0 +1,18 @@
+{
+  "name": "webelements",
+  "version": "1.0.0",
+  "description": "A collection of reusable web components",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js --watch"
+  },
+  "keywords": ["web-components", "ui", "glassmorphic"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "chokidar": "^3.5.3",
+    "fs-extra": "^10.0.0",
+    "minimist": "^1.2.6"
+  }
+}

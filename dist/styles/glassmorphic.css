@@ -1,33 +1,106 @@
+/* Glassmorphic Design System - Core Styles */
 :root {
+  /* Glassmorphic Colors */
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   --glass-backdrop: blur(12px);
+  
+  /* Glassmorphic Sizing */
   --glass-border-radius: 16px;
   --glass-padding: 1.5rem;
+  --glass-margin: 1rem;
+  
+  /* Glassmorphic Effects */
   --glass-transition: all 0.3s ease;
+  --glass-hover-transform: translateY(-5px);
+  --glass-hover-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
 }
 
-/* Base Glassmorphic Card */
-.glass-card {
+/* Glassmorphic Utility Classes */
+.glass {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-backdrop);
   -webkit-backdrop-filter: var(--glass-backdrop);
   border: 1px solid var(--glass-border);
   border-radius: var(--glass-border-radius);
   box-shadow: var(--glass-shadow);
-  padding: var(--glass-padding);
   transition: var(--glass-transition);
+}
+
+.glass-hover:hover {
+  transform: var(--glass-hover-transform);
+  box-shadow: var(--glass-hover-shadow);
+}
+
+/* Glassmorphic Variations */
+.glass-thin {
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-backdrop: blur(8px);
+}
+
+.glass-thick {
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-backdrop: blur(16px);
+}
+
+.glass-primary {
+  --glass-bg: rgba(102, 126, 234, 0.1);
+  --glass-border: rgba(102, 126, 234, 0.3);
+}
+
+.glass-dark {
+  --glass-bg: rgba(0, 0, 0, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Glassmorphic Layout Utilities */
+.glass-padding {
+  padding: var(--glass-padding);
+}
+
+.glass-margin {
+  margin: var(--glass-margin);
+}
+
+.glass-rounded {
+  border-radius: var(--glass-border-radius);
+}
+
+/* Glassmorphic Transitions */
+.glass-transition {
+  transition: var(--glass-transition);
+}
+
+/* Glassmorphic Effects */
+.glass-blur {
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+}
+
+/* Glassmorphic Container */
+.glass-container {
   position: relative;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
-.glass-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+.glass-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  z-index: -1;
 }
-
-/* Glassmorphic Button */
 .glass-button {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
