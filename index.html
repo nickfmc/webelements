@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassmorphic UI Components</title>
+    <link rel="stylesheet" href="glassmorphic.css">
+    <link rel="stylesheet" href="hero-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .component-section {
+            margin-bottom: 3rem;
+        }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .component-preview {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .testimonial-bg {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+        
+        .testimonial-quote {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section 1 -->
+    <section class="hero hero-1">
+        <div class="hero-content">
+            <div class="glass-card" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <span class="glass-badge">New Release</span>
+                <h1 style="font-size: 3.5rem; margin: 1rem 0;">Create Stunning Glass UI</h1>
+                <p class="lead" style="font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9;">Transform your website with our beautiful glassmorphic components</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="glass-button" style="padding: 0.75rem 2rem; font-size: 1.1rem;">
+                        <i class="fas fa-rocket" style="margin-right: 8px;"></i> Get Started
+                    </button>
+                    <button class="glass-button" style="background: transparent; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.75rem 2rem; font-size: 1.1rem;">
+                        <i class="far fa-play-circle" style="margin-right: 8px;"></i> Watch Demo
+                    </button>
+                </div>
+                <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div class="stat-number" style="font-size: 2rem;">10K+</div>
+                        <div>Components</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="stat-number" style="font-size: 2rem;">50+</div>
+                        <div>Templates</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="stat-number" style="font-size: 2rem;">24/7</div>
+                        <div>Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <nav class="glass-nav">
+            <div class="logo">GlassUI</div>
+            <ul>
+                <li><a href="#cards">Cards</a></li>
+                <li><a href="#buttons">Buttons</a></li>
+                <li><a href="#forms">Forms</a></li>
+                <li><a href="#navigation">Navigation</a></li>
+            </ul>
+        </nav>
+        
+        <header class="text-center mb-4">
+            <h1>Glassmorphic UI Components</h1>
+            <p>Reusable, modern components with a frosted glass effect</p>
+        </header>
+        
+        <section id="cards" class="component-section">
+            <h2>Glass Cards</h2>
+            <div class="component-grid">
+                <div class="glass-card">
+                    <h3>Feature Card</h3>
+                    <p>This is a glass card component. It has a nice frosted glass effect with subtle hover animation.</p>
+                    <button class="glass-button mt-2">Learn More</button>
+                </div>
+                
+                <div class="glass-card">
+                    <h3>Stats Card</h3>
+                    <p class="text-large">1,234+</p>
+                    <p>Active Users</p>
+                </div>
+            </div>
+            
+            <div class="component-preview">
+                <h3>Usage:</h3>
+                <div class="code-block">
+                    &lt;div class="glass-card"&gt;<br>
+                    &nbsp;&nbsp;&lt;h3&gt;Card Title&lt;/h3&gt;<br>
+                    &nbsp;&nbsp;&lt;p&gt;Card content goes here.&lt;/p&gt;<br>
+                    &lt;/div&gt;
+                </div>
+            </div>
+        </section>
+        
+        <section id="buttons" class="component-section">
+            <h2>Glass Buttons</h2>
+            <div class="component-grid">
+                <div class="glass-card">
+                    <h3>Button Styles</h3>
+                    <button class="glass-button">Primary</button>
+                    <button class="glass-button" style="margin-left: 1rem;">Secondary</button>
+                    <div class="mt-3">
+                        <a href="#" class="glass-button">Link Button</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="component-preview">
+                <h3>Usage:</h3>
+                <div class="code-block">
+                    &lt;button class="glass-button"&gt;Click Me&lt;/button&gt;<br>
+                    &lt;a href="#" class="glass-button"&gt;Link Button&lt;/a&gt;
+                </div>
+            </div>
+        </section>
+        
+        <section id="forms" class="component-section">
+            <h2>Form Elements</h2>
+            <div class="component-grid">
+                <div class="glass-card" style="grid-column: 1 / -1; max-width: 500px; margin: 0 auto;">
+                    <h3 class="text-center">Contact Us</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="glass-input" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="glass-input" placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="glass-input" rows="4" placeholder="Your message"></textarea>
+                        </div>
+                        <button type="submit" class="glass-button">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        <section id="navigation" class="component-section">
+            <h2>Navigation</h2>
+            <div class="component-preview">
+                <nav class="glass-nav">
+                    <div class="logo">Brand</div>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="mt-3">
+                    <h3>Usage:</h3>
+                    <div class="code-block">
+                        &lt;nav class="glass-nav"&gt;<br>
+                        &nbsp;&nbsp;&lt;div class="logo"&gt;Brand&lt;/div&gt;<br>
+                        &nbsp;&nbsp;&lt;ul&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;<br>
+                        &nbsp;&nbsp;&lt;/ul&gt;<br>
+                        &lt;/nav&gt;
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <h3>Client Satisfaction</h3>
+                <p>Our clients love our glassmorphic designs</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <h3>Projects</h3>
+                <p>Delivered worldwide</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <h3>Support</h3>
+                <p>Dedicated team ready to help</p>
+            </div>
+        </section>
+
+        <!-- Hero Section 2 -->
+        <section class="hero hero-2" style="margin: 6rem -2rem; border-radius: 24px; overflow: hidden;">
+            <div class="hero-content">
+                <div class="glass-card featured" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Ready to Transform Your Website?</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Join thousands of designers and developers using our glassmorphic components to create stunning interfaces.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="glass-button" style="padding: 0.75rem 2rem; font-size: 1.1rem;">
+                            <i class="fas fa-download" style="margin-right: 8px;"></i> Download Now
+                        </button>
+                        <button class="glass-button" style="background: transparent; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.75rem 2rem; font-size: 1.1rem;">
+                            <i class="fas fa-code" style="margin-right: 8px;"></i> View Documentation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section class="testimonial-section">
+            <div class="testimonial-bg"></div>
+            <h2 class="text-center" style="color: white; margin-bottom: 3rem;">What Our Clients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
+                    </div>
+                    <p class="testimonial-quote">These glassmorphic components completely transformed our website. The design is modern and the code is clean and easy to implement.</p>
+                    <div class="testimonial-author">Sarah Johnson</div>
+                    <div class="testimonial-role">CEO, Creative Agency</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
+                    </div>
+                    <p class="testimonial-quote">The attention to detail in these components is outstanding. Our clients keep asking who designed our new interface!</p>
+                    <div class="testimonial-author">Michael Chen</div>
+                    <div class="testimonial-role">Lead Developer, Tech Corp</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client">
+                    </div>
+                    <p class="testimonial-quote">The glassmorphic effect adds such a premium feel to our product. The implementation was smooth and the results are stunning.</p>
+                    <div class="testimonial-author">Emma Davis</div>
+                    <div class="testimonial-role">Product Designer, Startup</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Simple animation for stats
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.textContent);
+                if (isNaN(target)) return;
+                
+                let current = 0;
+                const increment = target / 50; // Adjust speed of counting
+                
+                const updateCount = () => {
+                    if (current < target) {
+                        current += increment;
+                        stat.textContent = current >= target ? target + (stat.textContent.includes('%') ? '%' : '+') : Math.floor(current) + (stat.textContent.includes('%') ? '%' : '');
+                        requestAnimationFrame(updateCount);
+                    }
+                };
+                
+                // Start animation when stat is in viewport
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        updateCount();
+                        observer.unobserve(stat);
+                    }
+                });
+                
+                observer.observe(stat);
+            });
+        }
+        
+        // Run animation when page loads
+        window.addEventListener('load', animateStats);
+    </script>
+</body>
+</html>
