@@ -26,20 +26,17 @@
 }
 
 /* Form Styles */
+/* Form styles that extend the base glass class */
 .glass-form {
   max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  width: 100%;
 }
 
 .form-group {
   margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .form-group label {
@@ -56,7 +53,10 @@
   background: rgba(255, 255, 255, 0.1);
   color: white;
   font-family: 'Poppins', sans-serif;
-  transition: all 0.3s ease;
+  transition: var(--glass-transition, all 0.3s ease);
+  display: block;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .form-control:focus {

@@ -8,448 +8,194 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Component CSS Files (will be replaced with all.css in dist) -->
-    <link rel="stylesheet" href="dist/styles/glassmorphic.css">
-    <link rel="stylesheet" href="dist/styles/button.css">
-    <link rel="stylesheet" href="dist/styles/card.css">
-    <link rel="stylesheet" href="dist/styles/hero.css">
-    <link rel="stylesheet" href="dist/styles/testimonial.css">
+    <!-- Prism.js for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <!-- Combined CSS in production -->
+    <link rel="stylesheet" href="dist/styles/all.css">
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+        }
+        
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary-gradient);
             min-height: 100vh;
             margin: 0;
-            padding: 2rem;
             color: white;
             line-height: 1.6;
+            padding: 0;
+        }
+
+        body * {
+            box-sizing: border-box;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 1;
         }
         
-        .component-section {
+        .section {
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            text-align: center;
             margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
         }
         
-        .component-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #c4c4c4 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
-        .component-preview {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 2rem;
+        .section-title p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
         }
         
         h1, h2, h3 {
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
         
-        .code-block {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 1rem;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
+        p {
             margin: 1rem 0;
-            overflow-x: auto;
+            opacity: 0.9;
         }
         
-        .stats-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 4rem 2rem;
-            text-align: center;
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
         
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 16px;
-            margin: 2rem;
+        img {
+            max-width: 100%;
+            height: auto;
         }
         
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        
-        .testimonial-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-        
-        .testimonial-bg {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 16px;
-            margin: 2rem;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 16px;
-        }
-        
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin: 0 auto;
-        }
-        
-        .testimonial-quote {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .testimonial-author {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .testimonial-role {
-            font-size: 0.9rem;
-            color: #ccc;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section 1 -->
-    <section class="hero hero-1">
-        <div class="hero-content">
-            <div class="glass-card" style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <span class="glass-badge">New Release</span>
-                <h1 style="font-size: 3.5rem; margin: 1rem 0;">Create Stunning Glass UI</h1>
-                <p class="lead" style="font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9;">Transform your website with our beautiful glassmorphic components</p>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <button class="glass-button" style="padding: 0.75rem 2rem; font-size: 1.1rem;">
-                        <i class="fas fa-rocket" style="margin-right: 8px;"></i> Get Started
-                    </button>
-                    <button class="glass-button" style="background: transparent; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.75rem 2rem; font-size: 1.1rem;">
-                        <i class="far fa-play-circle" style="margin-right: 8px;"></i> Watch Demo
-                    </button>
-                </div>
-                <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-                    <div style="text-align: center;">
-                        <div class="stat-number" style="font-size: 2rem;">10K+</div>
-                        <div>Components</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div class="stat-number" style="font-size: 2rem;">50+</div>
-                        <div>Templates</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div class="stat-number" style="font-size: 2rem;">24/7</div>
-                        <div>Support</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="container">
-        <nav class="glass-nav">
-            <div class="logo">GlassUI</div>
-            <ul>
-                <li><a href="#cards">Cards</a></li>
-                <li><a href="#buttons">Buttons</a></li>
-                <li><a href="#forms">Forms</a></li>
-                <li><a href="#navigation">Navigation</a></li>
-            </ul>
-        </nav>
+    <!-- Navigation -->
+    <!--#include virtual="src/includes/navigation.html" -->
+    
+    <!-- Header/Hero -->
+    <!--#include virtual="src/includes/header.html" -->
+    
+    <main>
+        <!-- Buttons Section -->
+        <!--#include virtual="src/includes/buttons-section.html" -->
         
-        <header class="text-center mb-4">
-            <h1>Glassmorphic UI Components</h1>
-            <p>Reusable, modern components with a frosted glass effect</p>
-        </header>
+        <!-- Cards Section -->
+        <!--#include virtual="src/includes/cards-section.html" -->
         
-        <section id="cards" class="component-section">
-            <h2>Glass Cards</h2>
-            <div class="component-preview">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-                    <div class="glass-card">
-                        <h3>Feature Card</h3>
-                        <p>This is a glass card component. It has a nice frosted glass effect with subtle hover animation.</p>
-                        <button class="glass-button mt-2">Learn More</button>
-                    </div>
-                    
-                    <div class="glass-card">
-                        <h3>Stats Card</h3>
-                        <p class="text-large">1,234+</p>
-                        <p>Active Users</p>
-                    </div>
-                </div>
-                
-                <div class="mt-3">
-                    <h3>Usage:</h3>
-                    <div class="code-block">
-                        &lt;div class="glass-card"&gt;<br>
-                        &nbsp;&nbsp;&lt;h3&gt;Card Title&lt;/h3&gt;<br>
-                        &nbsp;&nbsp;&lt;p&gt;Card content goes here.&lt;/p&gt;<br>
-                        &lt;button class="glass-button mt-2"&gt;Learn More&lt;/button&gt;<br>
-                        &lt;/div&gt;
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Forms Section -->
+        <!--#include virtual="src/includes/forms-section.html" -->
         
-        <section id="buttons" class="component-section">
-            <h2>Glass Buttons</h2>
-            <div class="component-preview">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-                    <div class="glass-card">
-                        <h3>Button Styles</h3>
-                        <button class="glass-button">Primary</button>
-                        <button class="glass-button" style="margin-left: 1rem;">Secondary</button>
-                        <div class="mt-3">
-                            <a href="#" class="glass-button">Link Button</a>
-                            <button class="glass-button" style="margin-left: 1rem;" disabled>Disabled</button>
-                        </div>
-                        <div class="mt-3">
-                            <button class="glass-button" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Small</button>
-                            <button class="glass-button" style="margin-left: 1rem;">Default</button>
-                            <button class="glass-button" style="margin-left: 1rem; padding: 1rem 2rem; font-size: 1.1rem;">Large</button>
-                        </div>
-                    </div>
-                    
-                    <div class="glass-card">
-                        <h3>Button with Icons</h3>
-                        <button class="glass-button">
-                            <i class="fas fa-download" style="margin-right: 8px;"></i> Download
-                        </button>
-                        <button class="glass-button" style="margin-left: 1rem;">
-                            <i class="fas fa-shopping-cart" style="margin-right: 8px;"></i> Add to Cart
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="mt-3">
-                    <h3>Usage:</h3>
-                    <div class="code-block">
-                        &lt;!-- Primary Button --&gt;<br>
-                        &lt;button class="glass-button"&gt;Primary Button&lt;/button&gt;<br><br>
-                        
-                        &lt;!-- Secondary Button --&gt;<br>
-                        &lt;button class="glass-button" style="background: transparent; border: 1px solid rgba(255, 255, 255, 0.3);"&gt;Secondary Button&lt;/button&gt;<br><br>
-                        
-                        &lt;!-- Link Button --&gt;<br>
-                        &lt;a href="#" class="glass-button"&gt;Link Button&lt;/a&gt;<br><br>
-                        
-                        &lt;!-- Disabled Button --&gt;<br>
-                        &lt;button class="glass-button" disabled&gt;Disabled Button&lt;/button&gt;<br><br>
-                        
-                        &lt;!-- Button with Icon --&gt;<br>
-                        &lt;button class="glass-button"&gt;<br>
-                        &nbsp;&nbsp;&lt;i class="fas fa-download"&gt;&lt;/i&gt; Download<br>
-                        &lt;/button&gt;
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="forms" class="component-section">
-            <div class="container">
-                <h2>Contact Us</h2>
-                <form class="glass-form">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" class="form-control" placeholder="What's this about?">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" class="form-control" placeholder="How can we help you?" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Send Message</button>
-                </form>
-                
-                <div class="mt-4" style="background: rgba(0, 0, 0, 0.2); padding: 1.5rem; border-radius: 12px; margin-top: 3rem;">
-                    <h3 class="text-center" style="margin-bottom: 1.5rem;">Implementation Example</h3>
-                    <pre><code class="language-html">&lt;form class="glass-form"&gt;
-  &lt;div class="form-group"&gt;
-    &lt;label for="name"&gt;Full Name&lt;/label&gt;
-    &lt;input type="text" id="name" class="form-control" placeholder="Enter your name" required&gt;
-  &lt;/div&gt;
-  
-  &lt;div class="form-group"&gt;
-    &lt;label for="email"&gt;Email Address&lt;/label&gt;
-    &lt;input type="email" id="email" class="form-control" placeholder="Enter your email" required&gt;
-  &lt;/div&gt;
-  
-  &lt;div class="form-group"&gt;
-    &lt;label for="subject"&gt;Subject&lt;/label&gt;
-    &lt;input type="text" id="subject" class="form-control" placeholder="What's this about?"&gt;
-  &lt;/div&gt;
-  
-  &lt;div class="form-group"&gt;
-    &lt;label for="message"&gt;Your Message&lt;/label&gt;
-    &lt;textarea id="message" class="form-control" placeholder="How can we help you?" required&gt;&lt;/textarea&gt;
-  &lt;/div&gt;
-  
-  &lt;button type="submit" class="btn-submit"&gt;Send Message&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-                </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="navigation" class="component-section">
-            <h2>Navigation</h2>
-            <div class="component-preview">
-                <nav class="glass-nav">
-                    <div class="logo">Brand</div>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </nav>
-                
-                <div class="mt-3">
-                    <h3>Usage:</h3>
-                    <div class="code-block">
-                        &lt;nav class="glass-nav"&gt;<br>
-                        &nbsp;&nbsp;&lt;div class="logo"&gt;Brand&lt;/div&gt;<br>
-                        &nbsp;&nbsp;&lt;ul&gt;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;<br>
-                        &nbsp;&nbsp;&lt;/ul&gt;<br>
-                        &lt;/nav&gt;
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Stats Section -->
-        <section class="stats-section">
-            <div class="stat-card">
-                <div class="stat-number">98%</div>
-                <h3>Client Satisfaction</h3>
-                <p>Our clients love our glassmorphic designs</p>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">500+</div>
-                <h3>Projects</h3>
-                <p>Delivered worldwide</p>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">24/7</div>
-                <h3>Support</h3>
-                <p>Dedicated team ready to help</p>
-            </div>
-        </section>
-
-        <!-- Hero Section 2 -->
-        <section class="hero hero-2" style="margin: 6rem -2rem; border-radius: 24px; overflow: hidden;">
-            <div class="hero-content">
-                <div class="glass-card featured" style="max-width: 800px; margin: 0 auto; text-align: center;">
-                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Ready to Transform Your Website?</h2>
-                    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Join thousands of designers and developers using our glassmorphic components to create stunning interfaces.</p>
-                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                        <button class="glass-button" style="padding: 0.75rem 2rem; font-size: 1.1rem;">
-                            <i class="fas fa-download" style="margin-right: 8px;"></i> Download Now
-                        </button>
-                        <button class="glass-button" style="background: transparent; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.75rem 2rem; font-size: 1.1rem;">
-                            <i class="fas fa-code" style="margin-right: 8px;"></i> View Documentation
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonial Section -->
-        <section class="testimonial-section">
-            <div class="testimonial-bg"></div>
-            <h2 class="text-center" style="color: white; margin-bottom: 3rem;">What Our Clients Say</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
-                    </div>
-                    <p class="testimonial-quote">These glassmorphic components completely transformed our website. The design is modern and the code is clean and easy to implement.</p>
-                    <div class="testimonial-author">Sarah Johnson</div>
-                    <div class="testimonial-role">CEO, Creative Agency</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
-                    </div>
-                    <p class="testimonial-quote">The attention to detail in these components is outstanding. Our clients keep asking who designed our new interface!</p>
-                    <div class="testimonial-author">Michael Chen</div>
-                    <div class="testimonial-role">Lead Developer, Tech Corp</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client">
-                    </div>
-                    <p class="testimonial-quote">The glassmorphic effect adds such a premium feel to our product. The implementation was smooth and the results are stunning.</p>
-                    <div class="testimonial-author">Emma Davis</div>
-                    <div class="testimonial-role">Product Designer, Startup</div>
-                </div>
-            </div>
-        </section>
-    </div>
-
+        <!-- Testimonials Section -->
+        <!--#include virtual="src/includes/testimonials-section.html" -->
+    </main>
+    
+    <!-- Footer -->
+    <!--#include virtual="src/includes/footer.html" -->
+    
+    <!-- Prism.js for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    
     <script>
         // Simple animation for stats
         function animateStats() {
             const stats = document.querySelectorAll('.stat-number');
             stats.forEach(stat => {
-                const target = parseInt(stat.textContent);
-                if (isNaN(target)) return;
-                
+                const target = +stat.getAttribute('data-target') || 0;
+                const duration = 2000; // 2 seconds
+                const step = target / (duration / 16); // 60fps
                 let current = 0;
-                const increment = target / 50; // Adjust speed of counting
                 
                 const updateCount = () => {
+                    current += step;
                     if (current < target) {
-                        current += increment;
-                        stat.textContent = current >= target ? target + (stat.textContent.includes('%') ? '%' : '+') : Math.floor(current) + (stat.textContent.includes('%') ? '%' : '');
+                        stat.textContent = Math.ceil(current);
                         requestAnimationFrame(updateCount);
+                    } else {
+                        stat.textContent = target;
                     }
                 };
                 
-                // Start animation when stat is in viewport
-                const observer = new IntersectionObserver((entries) => {
-                    if (entries[0].isIntersecting) {
-                        updateCount();
-                        observer.unobserve(stat);
-                    }
-                });
-                
-                observer.observe(stat);
+                if (target > 0) {
+                    setTimeout(updateCount, 100); // Small delay before starting
+                }
             });
         }
         
         // Run animation when page loads
-        window.addEventListener('load', animateStats);
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav ul');
+            
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', function() {
+                    nav.classList.toggle('show');
+                    this.classList.toggle('active');
+                });
+                
+                // Close mobile menu when clicking on a nav link
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        nav.classList.remove('show');
+                        menuToggle.classList.remove('active');
+                    });
+                });
+            }
+            
+            // Initialize stats animation when in viewport
+            const stats = document.querySelectorAll('.stat-number');
+            if (stats.length > 0) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateStats();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                stats.forEach(stat => observer.observe(stat));
+            }
+        });
     </script>
 </body>
 </html>

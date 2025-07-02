@@ -1,33 +1,65 @@
 const fs = require('fs-extra');
 const path = require('path');
-const chokidar = require('chokidar');
-const args = require('minimist')(process.argv.slice(2));
+const { promisify } = require('util');
+const readdir = promisify(fs.readdir);
+const stat = promisify(fs.stat);
+
+// Simple argument parsing
+const args = {};
+process.argv.slice(2).forEach(arg => {
+  const [key, value] = arg.split('=');
+  args[key.replace(/^-+/, '')] = value || true;
+});
 
 // Configuration
 const config = {
   src: 'src',
   dist: 'dist',
+  includes: 'src/includes',
   components: {
+    'glass': ['glass-base.css'],  // Base glass styles first
+    'header': ['header.css'],     // Header styles
     'button': ['button.css'],
     'card': ['card.css'],
-    'hero': ['hero.css'],
+    'hero': ['hero.css', 'hero-styles.css'],
     'testimonial': ['testimonial.css'],
-    'form': ['form.css'],
-    'glassmorphic': ['glassmorphic.css']
+    'form': ['form.css']
   },
   // Order of CSS imports (lower numbers are imported first)
   cssOrder: {
-    'glassmorphic.css': 1,
-    'button.css': 2,
-    'card.css': 3,
-    'testimonial.css': 4,
-    'form.css': 5,
-    'hero.css': 6
+    'glass-base.css': 1,  // Base glass styles first
+    'header.css': 2,      // Header styles early for proper layering
+    'button.css': 3,
+    'card.css': 4,
+    'testimonial.css': 5,
+    'form.css': 6,
+    'hero.css': 7
   }
 };
 
 // Ensure dist directory exists
 fs.ensureDirSync(config.dist);
+
+// Process includes in HTML content
+async function processIncludes(content, baseDir = '') {
+  const includeRegex = /<!--\s*#include\s+file=["']([^"']+)["']\s*-->/g;
+  let match;
+  let result = content;
+  
+  while ((match = includeRegex.exec(content)) !== null) {
+    const includePath = path.join(baseDir, match[1]);
+    try {
+      let includeContent = await fs.readFile(includePath, 'utf8');
+      // Recursively process includes in the included file
+      includeContent = await processIncludes(includeContent, path.dirname(includePath));
+      result = result.replace(match[0], includeContent);
+    } catch (err) {
+      console.error(`Error including file: ${includePath}`, err);
+    }
+  }
+  
+  return result;
+}
 
 // Copy and combine CSS files
 async function build() {
@@ -36,103 +68,93 @@ async function build() {
   // Ensure dist directory is clean
   await fs.emptyDir(config.dist);
   
-  // Copy and update HTML file
-  let html = await fs.readFile('index.html', 'utf8');
+  // Process HTML includes
+  const htmlContent = await fs.readFile('index.html', 'utf8');
+  const processedHtml = await processIncludes(htmlContent);
   
   // Create styles directory in dist
   const stylesDir = path.join(config.dist, 'styles');
   await fs.ensureDir(stylesDir);
   
-  // Copy all CSS files from src/components to dist/styles
+    // Copy all component CSS files to dist/styles
   for (const [component, files] of Object.entries(config.components)) {
-    for (const file of files) {
-      const sourcePath = path.join(config.src, 'components', component, file);
-      const destPath = path.join(stylesDir, file);
-      
-      if (await fs.pathExists(sourcePath)) {
-        await fs.copyFile(sourcePath, destPath);
-        console.log(`Copied ${file} to dist/styles/`);
-      }
-    }
-  }
-  
-  // Create combined CSS file
-  let combinedCss = '/* Combined CSS for all components */\n\n';
-  
-  // Process each component in order
-  const sortedComponents = Object.entries(config.components).sort(([a], [b]) => {
-    const fileA = a + '.css';
-    const fileB = b + '.css';
-    return (config.cssOrder[fileA] || 999) - (config.cssOrder[fileB] || 999);
-  });
-  
-  for (const [component, files] of sortedComponents) {
     const componentDir = path.join(config.src, 'components', component);
-    await fs.ensureDir(componentDir);
     
+    // Check if component directory exists
+    if (!(await fs.pathExists(componentDir))) {
+      console.warn(`Component directory not found: ${componentDir}`);
+      continue;
+    }
+    
+    // Process each CSS file for this component
     for (const file of files) {
       const sourcePath = path.join(componentDir, file);
       const destPath = path.join(stylesDir, file);
       
       if (await fs.pathExists(sourcePath)) {
-        // Copy individual CSS file to dist/styles
-        await fs.copy(sourcePath, destPath, { overwrite: true });
+        await fs.copy(sourcePath, destPath);
         console.log(`Copied ${component}/${file} to dist/styles/`);
-        
-        // Add to combined CSS
-        if (file.endsWith('.css')) {
-          const content = await fs.readFile(sourcePath, 'utf8');
-          combinedCss += `/* ${component}/${file} */\n${content}\n\n`;
-        }
+      } else {
+        console.warn(`CSS file not found: ${sourcePath}`);
       }
     }
-    
-    // Create component's index.js
-    const indexPath = path.join(componentDir, 'index.js');
-    const importStatements = files
-      .filter(f => f.endsWith('.css'))
-      .map(f => `import './${f}';`)
-      .join('\n');
-    
-    await fs.writeFile(indexPath, `// ${component} component\n${importStatements}\n`);
   }
   
-  // Update HTML to reference files in dist/styles instead of src/components
-  html = html.replace(/href=["']src\/components\/([^"']+)["']/g, 'href="styles/$1"');
+  // Combine CSS files in the correct order
+  let combinedCss = '/* Combined CSS for all components */\n\n';
+  
+  // First, collect all CSS files with their order
+  const cssFiles = [];
+  for (const [component, files] of Object.entries(config.components)) {
+    for (const file of files) {
+      const sourcePath = path.join(config.src, 'components', component, file);
+      if (await fs.pathExists(sourcePath)) {
+        const order = config.cssOrder[file] || 999;
+        cssFiles.push({
+          path: sourcePath,
+          component,
+          file,
+          order
+        });
+      }
+    }
+  }
+  
+  // Sort CSS files by their defined order
+  cssFiles.sort((a, b) => a.order - b.order);
+  
+  // Add component styles to combined CSS
+  for (const { path: sourcePath, component, file } of cssFiles) {
+    const content = await fs.readFile(sourcePath, 'utf8');
+    combinedCss += `/* ${component}/${file} */\n${content}\n\n`;
+  }
   
   // Write combined CSS file
-  const combinedCssPath = path.join(stylesDir, 'all.css');
-  await fs.writeFile(combinedCssPath, combinedCss);
-  console.log(`Created combined CSS file: ${combinedCssPath}`);
+  await fs.writeFile(path.join(stylesDir, 'all.css'), combinedCss);
+  console.log('Created combined CSS file: dist/styles/all.css');
   
-  // Update HTML to use combined CSS
-  html = html.replace(/<link[^>]*href=['"]([^'"]*\.css)['"][^>]*>/g, '');
-  const newCssLink = '    <link rel="stylesheet" href="styles/all.css">';
-  const headCloseTag = html.indexOf('</head>');
-  if (headCloseTag !== -1) {
-    html = html.slice(0, headCloseTag) + newCssLink + '\n    ' + html.slice(headCloseTag);
-  }
+  // Update HTML to use combined CSS in production
+  let finalHtml = processedHtml
+    .replace(/<link[^>]*href=['"]([^'"]*\.css)['"][^>]*>/g, '')
+    .replace('</head>', '    <link rel="stylesheet" href="styles/all.css">\n    </head>');
   
   // Write updated HTML to dist
-  await fs.writeFile(path.join(config.dist, 'index.html'), html);
+  await fs.writeFile(path.join(config.dist, 'index.html'), finalHtml);
+  
+  // Copy assets
+  if (await fs.pathExists(path.join(config.src, 'assets'))) {
+    await fs.copy(path.join(config.src, 'assets'), path.join(config.dist, 'assets'));
+    console.log('Copied assets to dist/assets/');
+  }
   
   console.log('Build complete!');
 }
 
-// Watch for changes in development
+// Simple watch mode implementation
 if (args.watch) {
-  console.log('Watching for changes...');
-  const watcher = chokidar.watch(['./src/**/*', 'index.html'], {
-    ignored: /(^|[\/\\])\../, // ignore dotfiles
-    persistent: true
-  });
-  
-  watcher
-    .on('change', path => {
-      console.log(`File ${path} has been changed`);
-      build();
-    })
-    .on('error', error => console.error(`Watcher error: ${error}`));
+  console.log('Watch mode not implemented. Please restart the build after changes.');
+  // In a real implementation, you might want to use chokidar or similar
+  // For now, we'll just run the build once
 }
 
 // Run build

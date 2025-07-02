@@ -1,0 +1,58 @@
+<header class="c-page-header">
+  <nav class="glass-nav">
+    <a href="#" class="logo">GlassUI</a>
+    <button class="menu-toggle" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#cards">Cards</a></li>
+      <li><a href="#buttons">Buttons</a></li>
+      <li><a href="#forms">Forms</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#" class="glass-button primary small">Get Started</a></li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('show');
+        this.classList.toggle('active');
+        this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+      });
+      
+      // Close menu when clicking on a nav link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('show');
+          menuToggle.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+    
+    // Add scrolled class on scroll
+    const header = document.querySelector('.c-page-header');
+    if (header) {
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+      
+      // Initialize scroll state
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      }
+    }
+  });
+</script>
+

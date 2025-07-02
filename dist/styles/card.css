@@ -1,4 +1,4 @@
-/* Card Styles */
+/* Card Section Styles */
 #cards {
   position: relative;
   padding: 4rem 0;
@@ -17,24 +17,25 @@
   z-index: 1;
 }
 
+/* Card Styles - Extends base glass class */
 .glass-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   padding: 1.5rem;
-  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   color: white;
   margin: 1rem 0;
+  transition: var(--glass-transition, all 0.3s ease);
 }
 
 .glass-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+}
+
+/* Featured Card Variation */
+.glass-card.featured {
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .card-header {
