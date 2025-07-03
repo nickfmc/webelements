@@ -7,11 +7,11 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Prism.js for code highlighting -->
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
     <!-- Combined CSS in production -->
-    
+    <link rel="stylesheet" href="styles/all.css">
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -106,8 +106,7 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="styles/all.css">
-    </head>
+</head>
 <body>
     <!-- Navigation -->
     <!--#include virtual="src/includes/navigation.html" -->
@@ -139,6 +138,9 @@
         
         <!-- Forms Section -->
         <!--#include virtual="src/includes/forms-section.html" -->
+
+        <!-- Accordion Section -->
+        <!--#include virtual="src/includes/accordion-section.html" -->
     </main>
     
     <!-- Footer -->
@@ -210,5 +212,6 @@
             }
         });
     </script>
+    <script src="js/accordion.js"></script>
 </body>
 </html>

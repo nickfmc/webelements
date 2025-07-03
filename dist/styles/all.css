@@ -151,6 +151,29 @@
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
+/* Glass Form Input Placeholder Consistency */
+.glass-light .glass-input::placeholder {
+    color: rgba(31, 41, 55, 0.5);
+}
+
+.glass-dark .glass-input::placeholder {
+    color: rgba(249, 250, 251, 0.5);
+}
+
+/* Glass Image Style */
+/* Use as: <div class="glass glass-light glass-img"><img src="..."></div> */
+.glass-img {
+  padding: 1rem; /* Spacing between the image and the glass edge */
+}
+
+.glass-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--glass-border-radius-sm); /* Slightly smaller radius for the inner image */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); /* A subtle shadow to lift the image */
+}
+
 
 /* header/header.css */
 /* Header/Navigation Styles */
@@ -476,8 +499,8 @@ glass-nav ul li a:not(.glass-button):hover::after {
   position: relative;
   padding: 6rem 2rem;
   overflow: hidden;
-  background: linear-gradient(135deg, #6A11CB 0%, #2575FC 100%);
-  color: white;
+  background: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  color: #1e293b; /* Set base text color to dark for light background */
 }
 
 .testimonial-section .container {
@@ -834,7 +857,7 @@ textarea.glass-input {
 /* Features Section Styles */
 .features-section {
   padding: 6rem 2rem;
-  background: #f4f7fc;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   position: relative;
   overflow: hidden;
 }
@@ -933,7 +956,7 @@ textarea.glass-input {
 /* Team Component Styles */
 .team-section {
   padding: 6rem 2rem;
-  background: #f4f7fc;
+  background: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
   position: relative;
   overflow: hidden;
 }
@@ -1401,6 +1424,65 @@ textarea.glass-input {
 }
 
 
+/* accordion/accordion.css */
+/* Accordion Component Styles */
+.accordion-section {
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.accordion-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.accordion-item {
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.accordion-button {
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-button::after {
+  content: '\f078'; /* Font Awesome chevron-down */
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  transition: transform 0.3s ease;
+  font-size: 1rem;
+}
+
+.accordion-button.active::after {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+}
+
+.accordion-content-inner {
+    padding: 0 1.5rem 1.5rem;
+}
+
+
 /* hero/hero-styles.css */
 /* Hero Section Styles */
 .hero {
@@ -1464,18 +1546,15 @@ textarea.glass-input {
 
 /* Glass Card Variations */
 .glass-card.featured {
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Glass styles are now handled by global classes */
     border-radius: 24px;
     padding: 2.5rem;
-    transition: all 0.4s ease;
+    transition: transform 0.4s ease;
 }
 
 .glass-card.featured:hover {
+    /* Hover effects are now handled by .glass-interactive */
     transform: translateY(-10px);
-    box-shadow: 0 15px 60px rgba(0, 0, 0, 0.3);
 }
 
 /* Stats Section */
@@ -1487,19 +1566,16 @@ textarea.glass-input {
 }
 
 .stat-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Glass styles are now handled by global classes */
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .stat-card:hover {
+    /* Hover effects are now handled by .glass-interactive */
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
 }
 
 .stat-number {

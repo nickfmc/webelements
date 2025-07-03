@@ -3,8 +3,8 @@
   position: relative;
   padding: 6rem 2rem;
   overflow: hidden;
-  background: linear-gradient(135deg, #6A11CB 0%, #2575FC 100%);
-  color: white;
+  background: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  color: #1e293b; /* Set base text color to dark for light background */
 }
 
 .testimonial-section .container {

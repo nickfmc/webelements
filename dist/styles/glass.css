@@ -147,3 +147,26 @@
   border-color: rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
+
+/* Glass Form Input Placeholder Consistency */
+.glass-light .glass-input::placeholder {
+    color: rgba(31, 41, 55, 0.5);
+}
+
+.glass-dark .glass-input::placeholder {
+    color: rgba(249, 250, 251, 0.5);
+}
+
+/* Glass Image Style */
+/* Use as: <div class="glass glass-light glass-img"><img src="..."></div> */
+.glass-img {
+  padding: 1rem; /* Spacing between the image and the glass edge */
+}
+
+.glass-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--glass-border-radius-sm); /* Slightly smaller radius for the inner image */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); /* A subtle shadow to lift the image */
+}

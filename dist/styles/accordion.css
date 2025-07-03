@@ -1,0 +1,56 @@
+/* Accordion Component Styles */
+.accordion-section {
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.accordion-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.accordion-item {
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.accordion-button {
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-button::after {
+  content: '\f078'; /* Font Awesome chevron-down */
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  transition: transform 0.3s ease;
+  font-size: 1rem;
+}
+
+.accordion-button.active::after {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+}
+
+.accordion-content-inner {
+    padding: 0 1.5rem 1.5rem;
+}

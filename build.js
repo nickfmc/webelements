@@ -27,7 +27,8 @@ const config = {
     'pricing': ['pricing.css'],
     'features': ['features.css'],
     'team': ['team.css'],
-    'cta': ['cta.css']
+    'cta': ['cta.css'],
+    'accordion': ['accordion.css']
   },
   // Order of CSS imports (lower numbers are imported first)
   cssOrder: {
@@ -41,7 +42,8 @@ const config = {
     'features.css': 8,
     'team.css': 9,
     'cta.css': 10,
-    'hero.css': 11
+    'hero.css': 11,
+    'accordion.css': 12
   }
 };
 
@@ -69,20 +71,29 @@ async function processIncludes(content, baseDir = '') {
   return result;
 }
 
-// Copy and combine CSS files
+// Copy and combine CSS/JS files
 async function build() {
   console.log('Building project...');
   
   // Ensure dist directory is clean
   await fs.emptyDir(config.dist);
-  
-  // Process HTML includes
-  const htmlContent = await fs.readFile('index.html', 'utf8');
-  const processedHtml = await processIncludes(htmlContent);
-  
-  // Create styles directory in dist
+
+  // Create asset directories in dist
   const stylesDir = path.join(config.dist, 'styles');
+  const jsDir = path.join(config.dist, 'js');
   await fs.ensureDir(stylesDir);
+  await fs.ensureDir(jsDir);
+
+  // --- Process HTML Files ---
+  const pages = ['index.html', 'showcase.html'];
+  for (const page of pages) {
+    if (await fs.pathExists(page)) {
+      const htmlContent = await fs.readFile(page, 'utf8');
+      const processedHtml = await processIncludes(htmlContent);
+      await fs.writeFile(path.join(config.dist, page), processedHtml);
+      console.log(`Processed ${page}`);
+    }
+  }
   
     // Copy all component CSS files to dist/styles
   for (const [component, files] of Object.entries(config.components)) {
@@ -141,13 +152,25 @@ async function build() {
   await fs.writeFile(path.join(stylesDir, 'all.css'), combinedCss);
   console.log('Created combined CSS file: dist/styles/all.css');
   
-  // Update HTML to use combined CSS in production
-  let finalHtml = processedHtml
-    .replace(/<link[^>]*href=['"]([^'"]*\.css)['"][^>]*>/g, '')
-    .replace('</head>', '    <link rel="stylesheet" href="styles/all.css">\n    </head>');
-  
-  // Write updated HTML to dist
-  await fs.writeFile(path.join(config.dist, 'index.html'), finalHtml);
+  // --- Process JavaScript Files ---
+  const accordionJsSrc = 'src/components/accordion/accordion.js';
+  if (await fs.pathExists(accordionJsSrc)) {
+    await fs.copy(accordionJsSrc, path.join(jsDir, 'accordion.js'));
+    console.log('Copied accordion.js to dist/js/');
+  }
+
+  // --- Finalize HTML Files ---
+  for (const page of pages) {
+    if (await fs.pathExists(path.join(config.dist, page))) {
+      let html = await fs.readFile(path.join(config.dist, page), 'utf8');
+      // Replace CSS links
+      html = html.replace(/<link rel="stylesheet" href="dist\/styles\/all.css">/g, '<link rel="stylesheet" href="styles/all.css">');
+      // Replace JS links
+      html = html.replace(/<script src="src\/components\/accordion\/accordion.js"><\/script>/g, '<script src="js/accordion.js"></script>');
+      await fs.writeFile(path.join(config.dist, page), html);
+      console.log(`Finalized links in ${page}`);
+    }
+  }
   
   // Copy assets
   if (await fs.pathExists(path.join(config.src, 'assets'))) {

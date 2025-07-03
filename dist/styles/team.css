@@ -1,7 +1,7 @@
 /* Team Component Styles */
 .team-section {
   padding: 6rem 2rem;
-  background: #f4f7fc;
+  background: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
   position: relative;
   overflow: hidden;
 }
