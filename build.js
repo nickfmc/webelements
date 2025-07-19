@@ -17,7 +17,8 @@ const config = {
   dist: 'dist',
   includes: 'src/includes',
   components: {
-    'glass': ['glass.css'],       // Core glassmorphic system
+    'glass': ['glass-base.css', 'glass.css'],       // Core glassmorphic system
+    'glass-fx': ['glass-fx.css', 'glass-fx.js', 'tilt-fx.js', 'spotlight-fx.js'], // Glass effects
     'header': ['header.css'],     // Header styles
     'button': ['button.css'],
     'card': ['card.css'],
@@ -32,7 +33,9 @@ const config = {
   },
   // Order of CSS imports (lower numbers are imported first)
   cssOrder: {
+    'glass-base.css': 0,    // Base variables and styles, must be first
     'glass.css': 1,         // Core glassmorphic system must be first
+    'glass-fx.css': 1.5,    // Glass effects styles
     'header.css': 2,      // Header styles early for proper layering
     'button.css': 3,
     'card.css': 4,

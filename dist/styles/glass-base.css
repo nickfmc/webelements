@@ -1,0 +1,108 @@
+/* Base Glass Effect */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --glass-blur: blur(12px);
+  --glass-border-radius: 16px;
+  --glass-transition: all 0.3s ease;
+}
+
+/* Base Glass Class */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--glass-border-radius);
+  box-shadow: var(--glass-shadow);
+  transition: var(--glass-transition);
+  box-sizing: border-box;
+}
+
+/* Glass Hover Effect */
+.glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Glass Card - Extends base glass styles */
+.glass-card {
+  /* Base glass styles */
+  background: var(--glass-bg, rgba(255, 255, 255, 0.1));
+  backdrop-filter: var(--glass-blur, blur(12px));
+  -webkit-backdrop-filter: var(--glass-blur, blur(12px));
+  border: var(--glass-border, 1px solid rgba(255, 255, 255, 0.2));
+  border-radius: var(--glass-border-radius, 16px);
+  box-shadow: var(--glass-shadow, 0 8px 32px 0 rgba(31, 38, 135, 0.37));
+  transition: var(--glass-transition, all 0.3s ease);
+  /* Card specific styles */
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glass Form - Extends base glass styles */
+.glass-form {
+  /* Base glass styles */
+  background: var(--glass-bg, rgba(255, 255, 255, 0.1));
+  backdrop-filter: var(--glass-blur, blur(12px));
+  -webkit-backdrop-filter: var(--glass-blur, blur(12px));
+  border: var(--glass-border, 1px solid rgba(255, 255, 255, 0.2));
+  border-radius: var(--glass-border-radius, 16px);
+  box-shadow: var(--glass-shadow, 0 8px 32px 0 rgba(31, 38, 135, 0.37));
+  transition: var(--glass-transition, all 0.3s ease);
+  /* Form specific styles */
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+}
+
+/* Glass Button - Extends base glass styles */
+.glass-button {
+  /* Base glass styles */
+  background: var(--glass-bg, rgba(255, 255, 255, 0.1));
+  backdrop-filter: var(--glass-blur, blur(12px));
+  -webkit-backdrop-filter: var(--glass-blur, blur(12px));
+  border: var(--glass-border, 1px solid rgba(255, 255, 255, 0.2));
+  border-radius: var(--glass-border-radius, 16px);
+  box-shadow: var(--glass-shadow, 0 8px 32px 0 rgba(31, 38, 135, 0.37));
+  transition: var(--glass-transition, all 0.3s ease);
+  /* Button specific styles */
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Glass Card Variations */
+.glass-card.featured {
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  :root {
+    --glass-border-radius: 12px;
+    --glass-blur: blur(8px);
+  }
+  
+  .glass-card,
+  .glass-form {
+    padding: 1.25rem;
+  }
+}

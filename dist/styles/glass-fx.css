@@ -1,0 +1,27 @@
+/* Glass FX - Shimmer Effect */
+.glass-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-shimmer .shimmer-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 80%
+    );
+    transform: translateX(-150%) skewX(-25deg);
+    pointer-events: none;
+    transition: transform 0.75s ease-out;
+}
+
+.glass-shimmer:hover .shimmer-effect,
+.glass-shimmer:focus .shimmer-effect {
+    transform: translateX(250%) skewX(-25deg);
+}

@@ -175,6 +175,36 @@
 }
 
 
+/* glass-fx/glass-fx.css */
+/* Glass FX - Shimmer Effect */
+.glass-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-shimmer .shimmer-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 80%
+    );
+    transform: translateX(-150%) skewX(-25deg);
+    pointer-events: none;
+    transition: transform 0.75s ease-out;
+}
+
+.glass-shimmer:hover .shimmer-effect,
+.glass-shimmer:focus .shimmer-effect {
+    transform: translateX(250%) skewX(-25deg);
+}
+
+
 /* header/header.css */
 /* Header/Navigation Styles */
 .c-page-header {
@@ -1481,6 +1511,172 @@ textarea.glass-input {
 .accordion-content-inner {
     padding: 0 1.5rem 1.5rem;
 }
+
+
+/* glass/glass-base.css */
+/* Base Glass Effect */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --glass-blur: blur(12px);
+  --glass-border-radius: 16px;
+  --glass-transition: all 0.3s ease;
+}
+
+/* Base Glass Class */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--glass-border-radius);
+  box-shadow: var(--glass-shadow);
+  transition: var(--glass-transition);
+  box-sizing: border-box;
+}
+
+/* Glass Hover Effect */
+.glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Glass Card - Extends base glass styles */
+.glass-card {
+  /* Base glass styles */
+  background: var(--glass-bg, rgba(255, 255, 255, 0.1));
+  backdrop-filter: var(--glass-blur, blur(12px));
+  -webkit-backdrop-filter: var(--glass-blur, blur(12px));
+  border: var(--glass-border, 1px solid rgba(255, 255, 255, 0.2));
+  border-radius: var(--glass-border-radius, 16px);
+  box-shadow: var(--glass-shadow, 0 8px 32px 0 rgba(31, 38, 135, 0.37));
+  transition: var(--glass-transition, all 0.3s ease);
+  /* Card specific styles */
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glass Form - Extends base glass styles */
+.glass-form {
+  /* Base glass styles */
+  background: var(--glass-bg, rgba(255, 255, 255, 0.1));
+  backdrop-filter: var(--glass-blur, blur(12px));
+  -webkit-backdrop-filter: var(--glass-blur, blur(12px));
+  border: var(--glass-border, 1px solid rgba(255, 255, 255, 0.2));
+  border-radius: var(--glass-border-radius, 16px);
+  box-shadow: var(--glass-shadow, 0 8px 32px 0 rgba(31, 38, 135, 0.37));
+  transition: var(--glass-transition, all 0.3s ease);
+  /* Form specific styles */
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+}
+
+/* Glass Button - Extends base glass styles */
+.glass-button {
+  /* Base glass styles */
+  background: var(--glass-bg, rgba(255, 255, 255, 0.1));
+  backdrop-filter: var(--glass-blur, blur(12px));
+  -webkit-backdrop-filter: var(--glass-blur, blur(12px));
+  border: var(--glass-border, 1px solid rgba(255, 255, 255, 0.2));
+  border-radius: var(--glass-border-radius, 16px);
+  box-shadow: var(--glass-shadow, 0 8px 32px 0 rgba(31, 38, 135, 0.37));
+  transition: var(--glass-transition, all 0.3s ease);
+  /* Button specific styles */
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Glass Card Variations */
+.glass-card.featured {
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  :root {
+    --glass-border-radius: 12px;
+    --glass-blur: blur(8px);
+  }
+  
+  .glass-card,
+  .glass-form {
+    padding: 1.25rem;
+  }
+}
+
+
+/* glass-fx/glass-fx.js */
+document.addEventListener('DOMContentLoaded', () => {
+    const shimmerElements = document.querySelectorAll('.glass-shimmer');
+
+    shimmerElements.forEach(el => {
+        const shimmer = document.createElement('div');
+        shimmer.className = 'shimmer-effect';
+        el.appendChild(shimmer);
+    });
+});
+
+
+/* glass-fx/tilt-fx.js */
+document.addEventListener('DOMContentLoaded', () => {
+    const tiltElements = document.querySelectorAll('.glass-tilt');
+
+    tiltElements.forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = el.getBoundingClientRect();
+            const x = e.clientX - left;
+            const y = e.clientY - top;
+
+            const rotateX = (y - height / 2) / (height / 2) * -5; // Reduced from -10 to -5 degrees
+            const rotateY = (x - width / 2) / (width / 2) * 5;   // Reduced from 10 to 5 degrees
+
+            el.style.transition = 'transform 0.1s ease-out';
+            el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        });
+
+        el.addEventListener('mouseleave', () => {
+            el.style.transition = 'transform 0.5s ease-in-out';
+            el.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        });
+    });
+});
+
+
+/* glass-fx/spotlight-fx.js */
+document.addEventListener('DOMContentLoaded', () => {
+    // The effect is enabled by adding the 'spotlight-active' class to the body
+    if (document.body.classList.contains('spotlight-active')) {
+        const spotlight = document.createElement('div');
+        spotlight.className = 'spotlight';
+        document.body.appendChild(spotlight);
+
+        window.addEventListener('mousemove', (e) => {
+            requestAnimationFrame(() => {
+                spotlight.style.setProperty('--x', `${e.clientX}px`);
+                spotlight.style.setProperty('--y', `${e.clientY}px`);
+            });
+        });
+    }
+});
 
 
 /* hero/hero-styles.css */
